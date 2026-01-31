@@ -4,7 +4,7 @@
 
 ## 👋 About Me
 I am an automation specialist with **2+ years of experience** crafting bespoke AI solutions for forward-thinking agencies and B2B companies. My expertise lies in bridging the gap between complex business requirements and cutting-edge technology. I design end-to-end workflows using **n8n, Make, and OpenAI** to operationalize growth and reduce overhead.
-
+**live preview**: https://mustafaai.netlify.app/
 ## 🚀 Services I Offer
 
 ### 🤖 AI & Automation
