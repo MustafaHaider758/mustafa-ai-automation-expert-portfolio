@@ -307,7 +307,7 @@ export default function Portfolio() {
               </div>
 
               <div className="pt-4">
-                <a href="#contact" className="text-emerald-600 border-b-2 border-emerald-400/30 pb-1 hover:border-emerald-500 hover:text-emerald-700 transition-all inline-flex items-center gap-2 font-medium">
+                <a href="https://drive.google.com/file/d/1EaTVSZH0VzwwGEE1ONYfHWAyybcG1-31/view?usp=sharing" className="text-emerald-600 border-b-2 border-emerald-400/30 pb-1 hover:border-emerald-500 hover:text-emerald-700 transition-all inline-flex items-center gap-2 font-medium">
                   Download Resume <ExternalLink size={14} />
                 </a>
               </div>
