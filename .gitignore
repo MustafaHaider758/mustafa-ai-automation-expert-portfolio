@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# reference files
+aina.html
+convert.js
+/scratch/

@@ -1,11 +1,11 @@
-
-import './App.css';
-import Portfolio from './portfolio';
+import React from 'react';
+import MustafaPortfolio from './MustafaPortfolio';
+import './index.css';
 
 function App() {
   return (
     <div className="App">
-      <Portfolio />
+      <MustafaPortfolio />
     </div>
   );
 }
