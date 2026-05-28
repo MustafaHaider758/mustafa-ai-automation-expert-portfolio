@@ -78,18 +78,32 @@ const PROJECTS_DATA = [
     solution: 'n8n workflow that drafts an outline with OpenAI, expands each slide, then calls the Google Slides API to render layouts and themes.'
   },
   {
-    title: 'Dynamic Record Management Workflow',
-    image: '/projects/dynamic-record-hub.jpg',
-    desc: 'End-to-end record management and synchronization across Airtable, CRMs, and external APIs via Make.com — with conflict resolution and automated recovery.',
-    location: 'Canada • Enterprise Ops',
-    tags: ['Make.com', 'Airtable', 'REST APIs', 'Cloud Functions'],
+    title: 'Gmail → Google Drive Attachment Workflow',
+    image: '/projects/gmail-drive-workflow.jpg',
+    desc: 'n8n workflow that automatically saves Gmail email attachments into structured Google Drive subfolders based on sender, label, and content rules. Delivered for a real Upwork client (5.0 rating).',
+    location: 'Upwork Client • Operations',
+    tags: ['n8n', 'Gmail API', 'Google Drive API', 'OAuth'],
     stats: [
-      { label: 'Billing Accuracy', value: '100%', percent: 100 },
-      { label: 'Manual Tracking', value: 'Eliminated', percent: 100 },
-      { label: 'Failure Recovery', value: 'Automated', percent: 100 }
+      { label: 'Client Rating', value: '5.0', percent: 100 },
+      { label: 'Manual Filing', value: 'Eliminated', percent: 100 },
+      { label: 'Delivery Time', value: '3 Days', percent: 100 }
     ],
-    challenge: 'Fragmented tools causing sync errors and 20+ hours of manual data entry weekly.',
-    solution: 'Unified API aggregation in Make.com with automatic conflict resolution, real-time syncing, and self-healing retries.'
+    challenge: 'Client receiving dozens of attachments daily, manually downloading and filing them into the correct project folders.',
+    solution: 'n8n workflow with Gmail trigger, label/sender rules, deterministic folder routing, duplicate detection, and structured error logging.'
+  },
+  {
+    title: 'EP Newsletter Preparation & Sending Pipeline',
+    image: '/projects/ep-newsletter.jpg',
+    desc: 'n8n workflow that prepares and sends a recurring European Parliament newsletter — pulling data from a database, formatting content, and dispatching email. Delivered for an Upwork client (5.0 / Reliable).',
+    location: 'Upwork Client • Media / Policy',
+    tags: ['n8n', 'PostgreSQL', 'Email APIs', 'Templating'],
+    stats: [
+      { label: 'Client Rating', value: '5.0', percent: 100 },
+      { label: 'Cadence', value: 'Scheduled', percent: 100 },
+      { label: 'Manual Edits', value: 'Removed', percent: 100 }
+    ],
+    challenge: 'Manual extraction, formatting, and email dispatch each newsletter cycle.',
+    solution: 'Scheduled n8n flow pulling records from the database, applying templates, and sending tracked emails with safe retry on failure.'
   }
 ];
 
@@ -435,35 +449,28 @@ export default function MustafaPortfolio() {
             <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tight mb-4">What I Build <span className="text-emerald-500 italic">For You</span></h2>
             <p className="text-muted max-w-2xl mx-auto font-medium mb-16">Bespoke automation systems designed specifically to dissolve operational headaches.</p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-min text-left">
-              <div className="bg-white p-10 rounded-[2.5rem] border border-black/5 shadow-3d group relative flex flex-col justify-between hover:shadow-3d-hover transition-all md:col-span-2">
-                <div className="relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-white shadow-3d-primary flex items-center justify-center mb-8"><MessageSquare className="w-8 h-8 text-[#25D366]" aria-hidden="true" /></div>
-                  <h3 className="text-2xl font-black text-foreground mb-4">AI Chat Agents</h3>
-                  <p className="text-muted font-medium text-sm leading-relaxed">Intelligent agents that qualify leads, answer FAQs, and handle support 24/7 on WhatsApp & Web.</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 auto-rows-min text-left">
+              {[
+                { Icon: MessageSquare, color: 'text-[#25D366]', title: 'AI Chat Agents', desc: 'Intelligent agents qualifying leads, answering FAQs, and handling support 24/7 on WhatsApp & Web.' },
+                { Icon: PhoneCall, color: 'text-emerald-500', title: 'Voice AI Systems', desc: 'Low-latency inbound and outbound agents (LiveKit, Deepgram, ElevenLabs) that book directly into CRM.' },
+                { Icon: Database, color: 'text-cyan-500', title: 'RAG Pipelines', desc: 'Production document Q&A with chunking, embeddings, vector search (pgvector / Chroma) and re-ranking.' },
+                { Icon: Workflow, color: 'text-orange-500', title: 'n8n & Make Workflows', desc: 'End-to-end orchestration: triggers, branching, retries, and clean integrations across SaaS tools.' },
+                { Icon: Zap, color: 'text-emerald-500', title: 'FastAPI Backends', desc: 'Async Python services with type-safe schemas, structured logging, and proper retry / idempotency logic.' },
+                { Icon: Cpu, color: 'text-indigo-500', title: 'LLM Integrations', desc: 'OpenAI & Claude pipelines for extraction, classification, summarization, and structured outputs.' },
+                { Icon: Globe, color: 'text-blue-400', title: 'Web Scraping & Bot Bypass', desc: 'Resilient crawlers with Cloudflare evasion, proxy rotation, and Playwright fallback for protected sources.' },
+                { Icon: Sparkles, color: 'text-violet-500', title: 'Agentic AI', desc: 'LangChain / LangGraph multi-step agents with tool calling, memory, and human-in-the-loop routing.' },
+                { Icon: CalendarCheck, color: 'text-rose-400', title: 'Smart Booking & Sync', desc: 'Scheduling, calendar, and CRM synchronization that removes operational friction end-to-end.' }
+              ].map((svc) => (
+                <div key={svc.title} className="bg-white p-6 rounded-2xl border border-black/5 shadow-3d group relative flex flex-col hover:shadow-3d-hover transition-all">
+                  <div className="relative z-10">
+                    <div className="w-12 h-12 rounded-xl bg-white shadow-3d-primary flex items-center justify-center mb-4">
+                      <svc.Icon className={`w-6 h-6 ${svc.color}`} aria-hidden="true" />
+                    </div>
+                    <h3 className="text-lg font-black text-foreground mb-2">{svc.title}</h3>
+                    <p className="text-muted font-medium text-xs leading-relaxed">{svc.desc}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="bg-white p-10 rounded-[2.5rem] border border-black/5 shadow-3d group relative flex flex-col justify-between hover:shadow-3d-hover transition-all md:col-span-1">
-                <div className="relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-white shadow-3d-primary flex items-center justify-center mb-8"><PhoneCall className="text-emerald-500 w-8 h-8" aria-hidden="true" /></div>
-                  <h3 className="text-2xl font-black text-foreground mb-4">Voice AI</h3>
-                  <p className="text-muted font-medium text-sm leading-relaxed">Low-latency inbound agents that book meetings into your CRM.</p>
-                </div>
-              </div>
-              <div className="bg-white p-10 rounded-[2.5rem] border border-black/5 shadow-3d group relative flex flex-col justify-between hover:shadow-3d-hover transition-all md:col-span-1">
-                <div className="relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-white shadow-3d-primary flex items-center justify-center mb-8"><Network className="text-blue-400 w-8 h-8" aria-hidden="true" /></div>
-                  <h3 className="text-2xl font-black text-foreground mb-4">Nurture Systems</h3>
-                  <p className="text-muted font-medium text-sm leading-relaxed">Automated follow-ups that turn cold leads into buyers.</p>
-                </div>
-              </div>
-              <div className="bg-white p-10 rounded-[2.5rem] border border-black/5 shadow-3d group relative flex flex-col justify-between hover:shadow-3d-hover transition-all md:col-span-2">
-                <div className="relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-white shadow-3d-primary flex items-center justify-center mb-8"><CalendarCheck className="text-rose-400 w-8 h-8" aria-hidden="true" /></div>
-                  <h3 className="text-2xl font-black text-foreground mb-4">Smart Booking</h3>
-                  <p className="text-muted font-medium text-sm leading-relaxed">Scheduling and workflow sync that removes operational friction.</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
