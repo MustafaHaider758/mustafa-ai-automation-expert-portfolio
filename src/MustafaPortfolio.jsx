@@ -36,18 +36,18 @@ const PROJECTS_DATA = [
     solution: 'Waterfall strategy (proxy → Scrapy → Playwright stealth) with a feedback loop that adapts to successful vectors per source. Hot paths moved into FastAPI workers with retries and DLQ.'
   },
   {
-    title: 'AI Lead Generation & Customer Segmentation — Real Estate',
-    image: '/projects/lead-gen-realestate.jpg',
-    desc: 'AI-powered lead qualification, segmentation, and follow-up ecosystem for a property management business. WhatsApp + CRM + scheduling fully automated.',
-    location: 'United Kingdom • Property Mgmt',
-    tags: ['n8n', 'Supabase', 'WhatsApp API', 'GPT-4', 'Calendly'],
+    title: 'Multi-Site Scraping Pack (4 Websites)',
+    image: '/projects/scraping-pack.jpg',
+    desc: 'n8n + Python workflow scraping 4 different websites with separate parsing logic per source, deduplication, and structured output into Google Sheets. Delivered for an Upwork client (5.0 / Reliable).',
+    location: 'Upwork Client • Data Engineering',
+    tags: ['n8n', 'Python', 'Playwright', 'Google Sheets API'],
     stats: [
-      { label: 'Missed Enquiries', value: 'Zero', percent: 100 },
-      { label: 'Follow-up Rate', value: '100%', percent: 100 },
-      { label: 'Live in Production', value: '5+ Months', percent: 100 }
+      { label: 'Client Rating', value: '5.0', percent: 100 },
+      { label: 'Sites Covered', value: '4', percent: 100 },
+      { label: 'Output', value: 'Structured', percent: 100 }
     ],
-    challenge: 'Hundreds of enquiries handled manually on WhatsApp by staff replying one by one, with no consistent follow-up.',
-    solution: 'Multi-phase n8n state machine for qualification, segmentation, and scheduling. Real-time sync into Supabase and Calendly with GPT-4 reasoning for intent.'
+    challenge: 'Client needed clean, structured data from 4 sites with different layouts, anti-bot behavior, and update cadences.',
+    solution: 'Per-source parser modules in an n8n orchestrator, with retries, content-hash dedup, and a normalized schema written to Google Sheets for the client team.'
   },
   {
     title: 'AI-Powered Social Media Automation',
