@@ -2,7 +2,7 @@ import React, { useState, useCallback, useMemo } from 'react';
 import {
   Sparkles, Menu, X, ArrowRight, Database,
   Mail, Calendar, Cpu, MessageSquare, Phone, Globe, Zap,
-  TrendingUp, Workflow, ExternalLink, MessageCircle, BarChart3, Clock, AlertTriangle, ShieldCheck, PhoneCall, Network, CalendarCheck, Linkedin, BriefcaseBusiness
+  TrendingUp, Workflow, ExternalLink, MessageCircle, BarChart3, Clock, AlertTriangle, ShieldCheck, PhoneCall, CalendarCheck, Linkedin, BriefcaseBusiness
 } from 'lucide-react';
 
 // --- Static Data ---
