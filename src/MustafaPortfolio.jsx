@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import {
-  Sparkles, Menu, ArrowRight, Database,
+  Sparkles, Menu, X, ArrowRight, Database,
   Mail, Calendar, Cpu, MessageSquare, Phone, Globe, Zap,
   TrendingUp, Workflow, ExternalLink, MessageCircle, BarChart3, Clock, AlertTriangle, ShieldCheck, PhoneCall, Network, CalendarCheck, Linkedin, BriefcaseBusiness
 } from 'lucide-react';
@@ -14,29 +14,73 @@ const TICKER_BRANDS = [
 ];
 
 const STATS_DATA = [
-  { label: 'Client Projects', value: '15+', id: 'stat-1' },
-  { label: 'Hours Saved', value: '500+', id: 'stat-2' },
-  { label: 'Workflows Built', value: '40+', id: 'stat-3' },
-  { label: 'Job Success', value: '90%', id: 'stat-4' }
+  { label: 'Client Projects', value: '8+', id: 'stat-1' },
+  { label: 'Sources Monitored', value: '850+', id: 'stat-2' },
+  { label: 'Production Workflows', value: '12+', id: 'stat-3' },
+  { label: 'Job Success', value: '100%', id: 'stat-4' }
 ];
 
 const PROJECTS_DATA = [
   {
-    title: 'Sila Real Estate Company',
-    desc: 'Designed a 10-workflow Automated Lead Ecosystem for tenant qualification, scheduling, and consistent follow-ups.',
+    title: 'Autonomous Web Intelligence Engine',
+    image: '/projects/web-intelligence.jpg',
+    desc: 'Self-adaptive scraping ecosystem covering 850+ European political and government domains with multi-vector bot bypass, Cloudflare evasion, and 24/7 monitoring. Built at EUmatrix.eu (Brussels).',
+    location: 'Belgium / EU • Data Engineering',
+    tags: ['Python', 'FastAPI', 'Google Cloud', 'n8n', 'Playwright', 'Scrapy', 'Supabase'],
+    stats: [
+      { label: 'Sources Monitored', value: '850+', percent: 100 },
+      { label: 'Cloudflare Bypass', value: 'Production', percent: 100 },
+      { label: 'Reporting', value: '24/7', percent: 100 }
+    ],
+    challenge: 'Aggressive anti-bot measures and Cloudflare protection across hundreds of unique site architectures, with strict reliability targets.',
+    solution: 'Waterfall strategy (proxy → Scrapy → Playwright stealth) with a feedback loop that adapts to successful vectors per source. Hot paths moved into FastAPI workers with retries and DLQ.'
+  },
+  {
+    title: 'AI Lead Generation & Customer Segmentation — Real Estate',
+    image: '/projects/lead-gen-realestate.jpg',
+    desc: 'AI-powered lead qualification, segmentation, and follow-up ecosystem for a property management business. WhatsApp + CRM + scheduling fully automated.',
     location: 'United Kingdom • Property Mgmt',
     tags: ['n8n', 'Supabase', 'WhatsApp API', 'GPT-4', 'Calendly'],
     stats: [
       { label: 'Missed Enquiries', value: 'Zero', percent: 100 },
-      { label: 'System Uptime', value: '5+ Months', percent: 100 },
-      { label: 'Follow-up Rate', value: '100%', percent: 100 }
+      { label: 'Follow-up Rate', value: '100%', percent: 100 },
+      { label: 'Live in Production', value: '5+ Months', percent: 100 }
     ],
-    challenge: 'Managing hundreds of enquiries via manual WhatsApp replies. Staff replying one by one; no follow-up system.',
-    solution: 'Complex state machine in n8n (5 phases) handling tenant qualification, updating Supabase in real-time.'
+    challenge: 'Hundreds of enquiries handled manually on WhatsApp by staff replying one by one, with no consistent follow-up.',
+    solution: 'Multi-phase n8n state machine for qualification, segmentation, and scheduling. Real-time sync into Supabase and Calendly with GPT-4 reasoning for intent.'
   },
   {
-    title: 'Dynamic Record Hub',
-    desc: 'End-to-end automation for record management with dynamic data synchronization across platforms.',
+    title: 'AI-Powered Social Media Automation',
+    image: '/projects/social-media-automation.jpg',
+    desc: 'End-to-end content automation: research, AI-generated copy, scheduling, and posting across channels using n8n, OpenAI and Supabase as the source of truth.',
+    location: 'Global • Marketing Ops',
+    tags: ['n8n', 'OpenAI API', 'Supabase', 'Webhooks'],
+    stats: [
+      { label: 'Manual Posting', value: 'Eliminated', percent: 100 },
+      { label: 'Content Cycle', value: 'Daily', percent: 100 },
+      { label: 'Channels', value: 'Multi-Platform', percent: 100 }
+    ],
+    challenge: 'Founder spending hours per day on copy, scheduling, and posting across multiple platforms with no central record.',
+    solution: 'n8n orchestrator + OpenAI generation step, Supabase as content store, scheduled posting with retry and per-channel adapters.'
+  },
+  {
+    title: 'AI-Driven Presentation Generator',
+    image: '/projects/ai-presentation-generator.jpg',
+    desc: 'Workflow that turns a prompt into a structured Google Slides deck using OpenAI for outline + content and the Slides API for layout — built in n8n.',
+    location: 'Global • Productivity Tooling',
+    tags: ['n8n', 'OpenAI API', 'Google Slides API'],
+    stats: [
+      { label: 'Deck Build Time', value: 'Minutes', percent: 100 },
+      { label: 'Manual Editing', value: 'Minimized', percent: 100 },
+      { label: 'API Orchestration', value: 'Automated', percent: 100 }
+    ],
+    challenge: 'Repetitive manual work building structured client decks from scratch.',
+    solution: 'n8n workflow that drafts an outline with OpenAI, expands each slide, then calls the Google Slides API to render layouts and themes.'
+  },
+  {
+    title: 'Dynamic Record Management Workflow',
+    image: '/projects/dynamic-record-hub.jpg',
+    desc: 'End-to-end record management and synchronization across Airtable, CRMs, and external APIs via Make.com — with conflict resolution and automated recovery.',
     location: 'Canada • Enterprise Ops',
     tags: ['Make.com', 'Airtable', 'REST APIs', 'Cloud Functions'],
     stats: [
@@ -44,41 +88,43 @@ const PROJECTS_DATA = [
       { label: 'Manual Tracking', value: 'Eliminated', percent: 100 },
       { label: 'Failure Recovery', value: 'Automated', percent: 100 }
     ],
-    challenge: 'Fragmented data toolsets causing constant sync errors and 20+ hours of manual data entry weekly.',
-    solution: 'Unified API aggregation layer in Make.com with automated conflict resolution and real-time syncing.'
-  },
-  {
-    title: 'Autonomous Web Intelligence Engine',
-    desc: 'Self-adaptive scraping ecosystem covering 800+ European domains with multi-vector bot bypass and daily reporting.',
-    location: 'Global • Data Engineering',
-    tags: ['Google Cloud', 'n8n', 'Playwright', 'Scrapy', 'Selenium', 'Adaptive Loop'],
-    stats: [
-      { label: 'Domains Monitored', value: '800+', percent: 100 },
-      { label: 'Bot Detection Bypass', value: 'High-Scale', percent: 100 },
-      { label: 'Admin Reporting', value: '24/7 Global', percent: 100 }
-    ],
-    challenge: 'Navigating aggressive anti-bot measures across hundreds of unique architectures without manual intervention.',
-    solution: 'Waterfall-strategy framework (Free-proxy -> Scrapy -> Playwright Stealth) with a feedback loop that adapts to successful vectors.'
+    challenge: 'Fragmented tools causing sync errors and 20+ hours of manual data entry weekly.',
+    solution: 'Unified API aggregation in Make.com with automatic conflict resolution, real-time syncing, and self-healing retries.'
   }
 ];
 
 const EXPERIENCE_DATA = [
   {
-    role: 'AI Automation Specialist',
+    role: 'AI & Data Engineer (Backend & Automation)',
+    company: 'EUmatrix.eu',
+    date: 'Oct 2025 - Present',
+    desc: 'Architecting scalable backend systems and data pipelines for a European political intelligence platform (Brussels). Owning the autonomous web crawling engine over 850+ sources, LLM-based extraction with OpenAI and Claude, and Supabase/PostgreSQL schema design. Most production code under NDA (Belgian & Romanian law).'
+  },
+  {
+    role: 'AI / ML Engineer (Internship)',
     company: 'DEVROLIN',
-    date: '2025 - Present',
-    desc: 'Designing AI-powered automation workflows using n8n and Make.com. Built RAG-based pipelines and chatbots saving 500+ hours annually.'
+    date: 'Jun 2025 - Sep 2025',
+    desc: 'Built real-world automation workflows in n8n integrating APIs, databases, and third-party services. Contributed to AI/ML model development with supervised learning, data preprocessing, and evaluation.'
+  },
+  {
+    role: 'Freelance AI Automation Engineer',
+    company: 'Upwork (Top Rated, 100% JSS)',
+    date: '2024 - Present',
+    desc: 'Delivered 8+ production engagements across n8n automations, web scraping, RAG/chatbots, and API orchestration for international clients. Consistently rated 5.0 / Reliable.'
   },
   {
     role: 'Technical Writer',
     company: 'EssayShark',
     date: '2022 - Present',
-    desc: 'Producing technical documentation on AI, Data Science, and Automation for enterprise clients.'
+    desc: 'Producing technical documentation on AI, Data Science, and Automation for enterprise and academic audiences.'
   }
 ];
 
 export default function MustafaPortfolio() {
-  const [activeView, setActiveView] = useState({ 0: 'results', 1: 'results', 2: 'results' });
+  const [activeView, setActiveView] = useState({ 0: 'results', 1: 'results', 2: 'results', 3: 'results', 4: 'results' });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
 
   const toggleView = useCallback((idx, view) => {
     setActiveView(prev => ({ ...prev, [idx]: view }));
@@ -116,10 +162,43 @@ export default function MustafaPortfolio() {
             </a>
           </div>
 
-          <button className="lg:hidden text-foreground p-2 hover:bg-black/5 rounded-full transition-colors" aria-label="Open Menu">
-            <Menu className="w-6 h-6" aria-hidden="true" />
+          <button
+            className="lg:hidden text-foreground p-2 hover:bg-black/5 rounded-full transition-colors"
+            aria-label={mobileMenuOpen ? "Close Menu" : "Open Menu"}
+            aria-expanded={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen(prev => !prev)}
+          >
+            {mobileMenuOpen
+              ? <X className="w-6 h-6" aria-hidden="true" />
+              : <Menu className="w-6 h-6" aria-hidden="true" />}
           </button>
         </div>
+
+        {mobileMenuOpen && (
+          <div className="lg:hidden absolute top-[72px] left-0 right-0 bg-white border-b border-black/5 shadow-3d animate-in slide-in-from-top-2">
+            <div className="container mx-auto px-6 py-6 flex flex-col gap-4">
+              {NAV_ITEMS.map((item) => (
+                <a
+                  key={`m-${item}`}
+                  href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
+                  onClick={closeMobileMenu}
+                  className="text-base font-semibold text-foreground py-3 border-b border-black/5 hover:text-emerald-500 transition-colors"
+                >
+                  {item}
+                </a>
+              ))}
+              <a
+                href="https://wa.me/923485872275"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMobileMenu}
+                className="mt-2 px-6 py-3 bg-emerald-500 text-white rounded-xl text-sm font-bold text-center shadow-3d-primary"
+              >
+                Work with me
+              </a>
+            </div>
+          </div>
+        )}
       </nav>
 
       <main>
@@ -400,6 +479,17 @@ export default function MustafaPortfolio() {
             <div className="space-y-16">
               {PROJECTS_DATA.map((project, idx) => (
                 <div key={project.title} className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-3d border border-black/5 relative overflow-hidden group hover:shadow-3d-hover transition-all duration-500">
+                  {project.image && (
+                    <div className="mb-8 -mt-4 -mx-4 md:-mx-8 rounded-[2rem] overflow-hidden border border-black/5 bg-slate-50">
+                      <img
+                        src={project.image}
+                        alt={`${project.title} preview`}
+                        loading="lazy"
+                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                        className="w-full h-44 md:h-56 object-cover"
+                      />
+                    </div>
+                  )}
                   <div className="grid lg:grid-cols-2 gap-12 relative z-10">
                     <div className="space-y-8 flex flex-col justify-between">
                       <div>
