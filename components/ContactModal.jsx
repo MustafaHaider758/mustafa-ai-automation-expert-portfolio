@@ -16,7 +16,7 @@ const SERVICES = [
 ]
 
 export default function ContactModal({ open, onClose, defaultService = '', defaultMessage = '' }) {
-  const blank = () => ({ name: '', email: '', phone: '', service: defaultService, message: defaultMessage })
+  const blank = () => ({ name: '', email: '', phone: '', service: defaultService, message: defaultMessage, _honey: '' })
 
   const [form, setForm]     = useState(blank)
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
@@ -58,6 +58,7 @@ export default function ContactModal({ open, onClose, defaultService = '', defau
           from_phone:   form.phone,
           service_need: form.service,
           message:      form.message,
+          _honey:       form._honey,
         }),
       })
       if (!res.ok) throw new Error('Failed')
@@ -171,6 +172,18 @@ export default function ContactModal({ open, onClose, defaultService = '', defau
             ) : (
               /* Form */
               <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+
+                {/* Honeypot — invisible to humans, bots fill it, server rejects if non-empty */}
+                <input
+                  type="text"
+                  name="website"
+                  value={form._honey}
+                  onChange={set('_honey')}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0, pointerEvents: 'none' }}
+                />
 
                 {/* Name + Email */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
