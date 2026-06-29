@@ -98,9 +98,12 @@ const ALLOWED_ORIGINS = [
 ]
 
 function originAllowed(request) {
-  const origin  = request.headers.get('origin')  ?? ''
-  const referer = request.headers.get('referer') ?? ''
-  return ALLOWED_ORIGINS.some(o => origin.startsWith(o) || referer.startsWith(o))
+  const origin  = request.headers.get('origin')
+  const referer = request.headers.get('referer')
+  // Fail-open when neither header is present (some proxies/mobile browsers strip them)
+  if (!origin && !referer) return true
+  const check = origin ?? referer ?? ''
+  return ALLOWED_ORIGINS.some(o => check.startsWith(o))
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
