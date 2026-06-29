@@ -25,7 +25,7 @@ const bodyFont = Inter({
   preload: true,
 })
 
-const BASE_URL = 'https://mustafa-ai-automation-expert-portfolio.vercel.app'
+const BASE_URL = 'https://mustafa-ai-automation-expert-portfolio-pd1zjnaop.vercel.app'
 
 export const metadata = {
   metadataBase: new URL(BASE_URL),
