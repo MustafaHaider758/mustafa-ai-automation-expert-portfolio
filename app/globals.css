@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  ::selection {
+    background: rgba(255, 122, 24, 0.18);
+    color: #141412;
+  }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: #f0eee8; }
+  ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.14); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255,122,24,0.5); }
+}
+
+@layer utilities {
+  .grid-bg {
+    background-image:
+      linear-gradient(to right,  rgba(0,0,0,0.048) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,0,0,0.048) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+}
+
+/* ---- Ticker ---- */
+@keyframes ticker-run {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-ticker {
+  display: flex;
+  width: max-content;
+  animation: ticker-run 38s linear infinite;
+  will-change: transform;
+}
+.animate-ticker:hover { animation-play-state: paused; }
+
+/* ---- Availability pulse ---- */
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0   rgba(255,122,24,0.6); }
+  70%  { box-shadow: 0 0 0 8px rgba(255,122,24,0);   }
+  100% { box-shadow: 0 0 0 0   rgba(255,122,24,0);   }
+}
+.pulse-accent { animation: pulse-ring 2.5s infinite; }
+
+/* ---- Service row hover ---- */
+.service-row {
+  border-left: 3px solid transparent;
+  transition: border-left-color 0.18s, background 0.18s;
+}
+.service-row:hover {
+  border-left-color: #ff7a18;
+  background: rgba(255,122,24,0.04);
+}
+
+/* ---- Scroll reveal ---- */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1),
+                transform 0.6s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-22px);
+    transition: opacity 0.55s cubic-bezier(0.16,1,0.3,1),
+                transform 0.55s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+}
+
+/* ---- Hero stagger fade-up ---- */
+@keyframes hero-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+.hero-fade {
+  opacity: 0;
+  animation: hero-up 0.72s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.hero-d0 { animation-delay: 0.05s; }
+.hero-d1 { animation-delay: 0.20s; }
+.hero-d2 { animation-delay: 0.38s; }
+.hero-d3 { animation-delay: 0.54s; }
+.hero-d4 { animation-delay: 0.70s; }
+.hero-d5 { animation-delay: 0.88s; }
+
+/* ---- Accent shimmer ---- */
+@keyframes shimmer-sweep {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+.text-shimmer {
+  background: linear-gradient(90deg, #ff7a18 0%, #ffb060 45%, #ff9030 70%, #ff7a18 100%);
+  background-size: 250% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: shimmer-sweep 4s ease infinite;
+}
+
+/* ── Abstract floating shapes ─────────────────────────────────────────── */
+
+/* Blob A — large organic, morphs + big drift */
+@keyframes shape-blob-a {
+  0%, 100% {
+    border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+    transform: translate(0px, 0px) rotate(0deg) scale(1);
+  }
+  25% {
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    transform: translate(22px, -52px) rotate(9deg) scale(1.05);
+  }
+  50% {
+    border-radius: 55% 45% 35% 65% / 60% 35% 65% 40%;
+    transform: translate(-16px, -68px) rotate(-7deg) scale(0.95);
+  }
+  75% {
+    border-radius: 45% 55% 58% 42% / 48% 62% 38% 52%;
+    transform: translate(28px, -44px) rotate(11deg) scale(1.06);
+  }
+}
+
+/* Blob B — second blob, different rhythm */
+@keyframes shape-blob-b {
+  0%, 100% {
+    border-radius: 42% 58% 62% 38% / 60% 40% 60% 40%;
+    transform: translate(0px, 0px) rotate(0deg) scale(1);
+  }
+  30% {
+    border-radius: 65% 35% 40% 60% / 50% 65% 35% 50%;
+    transform: translate(-20px, -50px) rotate(-10deg) scale(1.07);
+  }
+  60% {
+    border-radius: 55% 45% 65% 35% / 40% 55% 45% 60%;
+    transform: translate(16px, -64px) rotate(6deg) scale(0.93);
+  }
+}
+
+/* Circle ring — spins while drifting */
+@keyframes shape-ring {
+  0%, 100% { transform: translate(0px,   0px)  rotate(0deg);   }
+  30%       { transform: translate(-22px, -50px) rotate(72deg);  }
+  60%       { transform: translate(14px,  -64px) rotate(130deg); }
+  80%       { transform: translate(-8px,  -38px) rotate(100deg); }
+}
+
+/* Triangle — heavy rotation + drift */
+@keyframes shape-tri {
+  0%, 100% { transform: translate(0px, 0px)   rotate(0deg)   scale(1);    }
+  25%       { transform: translate(20px,-44px) rotate(55deg)  scale(1.12); }
+  50%       { transform: translate(-14px,-62px)rotate(105deg) scale(0.9);  }
+  75%       { transform: translate(26px,-38px) rotate(148deg) scale(1.08); }
+}
+
+/* Small dot — bounces hard */
+@keyframes shape-dot {
+  0%, 100% { transform: translate(0px, 0px)   scale(1);   }
+  50%       { transform: translate(-10px,-88px)scale(1.5); }
+}
+
+.sh1 { animation: shape-blob-a  14s ease-in-out infinite;       }
+.sh2 { animation: shape-ring    10s ease-in-out infinite 1.5s;  }
+.sh3 { animation: shape-tri     12s ease-in-out infinite 3s;    }
+.sh4 { animation: shape-blob-b  18s ease-in-out infinite 0.8s;  }
+.sh5 { animation: shape-dot      5s ease-in-out infinite 2s;    }
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-fade { opacity: 1 !important; animation: none; }
+  .text-shimmer { animation: none; background: #ff7a18; color: transparent; }
+  .sh1,.sh2,.sh3,.sh4,.sh5 { animation: none; }
+}
