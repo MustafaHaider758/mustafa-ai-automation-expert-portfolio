@@ -91,19 +91,18 @@ function isSuspicious(text) {
    portfolio itself. Stops scripted curl/Postman spam that bypasses the form.
    Always includes localhost for dev and the production Vercel domain.
    ───────────────────────────────────────────────────────────────────────── */
-const ALLOWED_ORIGINS = [
-  'http://localhost:3000',
-  'https://mustafa-ai-automation-expert-portfolio.vercel.app',
-  ...(process.env.VERCEL_URL ? [`https://${process.env.VERCEL_URL}`] : []),
-]
-
 function originAllowed(request) {
   const origin  = request.headers.get('origin')
   const referer = request.headers.get('referer')
-  // Fail-open when neither header is present (some proxies/mobile browsers strip them)
+  // Fail-open: no headers present (proxies, some mobile browsers)
   if (!origin && !referer) return true
   const check = origin ?? referer ?? ''
-  return ALLOWED_ORIGINS.some(o => check.startsWith(o))
+  // Allow localhost (dev), any *.vercel.app deployment (prod + previews),
+  // and any custom domain set via NEXT_PUBLIC_SITE_URL env var
+  if (check.startsWith('http://localhost')) return true
+  if (check.includes('.vercel.app'))        return true
+  if (process.env.NEXT_PUBLIC_SITE_URL && check.startsWith(process.env.NEXT_PUBLIC_SITE_URL)) return true
+  return false
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
