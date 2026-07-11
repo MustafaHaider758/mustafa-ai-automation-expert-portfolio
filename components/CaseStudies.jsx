@@ -82,6 +82,34 @@ const PROJECTS = [
     stats: ['5.0 client rating', 'Scheduled cadence', 'Manual edits removed'],
     glowColor: 'rgba(255,180,30,0.06)',
   },
+  {
+    idx: '07',
+    title: 'The Client Report Assembly Line',
+    location: 'Automations Limited - Marketing Agencies',
+    category: 'Client Reporting Automation',
+    service: 'n8n Workflows',
+    desc: 'Productized offer for marketing agencies still pulling numbers from Google Ads, Meta, and GA4 by hand every week. Ad platforms, analytics, and CRM feed into one dashboard that builds itself.',
+    challenge: 'Agencies losing 10+ hours a week per staffer to manual reporting, capping how many clients the team can carry.',
+    solution: 'A repeatable five-step build (audit, strategy, build, launch, ongoing optimization) connecting the agency’s existing ad and analytics platforms into one automated dashboard.',
+    tags: ['n8n', 'Make', 'API Integrations', 'Dashboards'],
+    stats: ['10+ hrs/week saved', 'First report free', '8-hr guarantee'],
+    glowColor: 'rgba(59,130,246,0.07)',
+    url: '/agency-reporting',
+  },
+  {
+    idx: '08',
+    title: 'Agency Reporting ROI Calculator',
+    location: 'Automations Limited - Free Tool',
+    category: 'Interactive Tool',
+    service: 'Web Development',
+    desc: 'A live calculator that turns an agency’s real hours-per-week and hourly cost into an instant weekly and annual cost, payback period, and ROI, used on discovery calls instead of guessing at numbers.',
+    challenge: 'Prospects don’t trust made-up savings numbers on a sales call.',
+    solution: 'Built an instant ROI calculator so real numbers can be produced live on the call, with a suggested guarantee threshold generated automatically.',
+    tags: ['Next.js', 'React', 'Client-side Calculation'],
+    stats: ['Instant ROI output', 'No signup required', 'Used live on calls'],
+    glowColor: 'rgba(6,182,212,0.06)',
+    url: '/roi-calculator',
+  },
 ]
 
 export default function CaseStudies() {
@@ -223,8 +251,25 @@ export default function CaseStudies() {
                     ))}
                   </div>
 
-                  {/* CTA button — opens modal pre-filled for this project */}
-                  <div className="mt-auto">
+                  {/* CTA buttons — live link (if any) + modal pre-filled for this project */}
+                  <div className="mt-auto flex items-center gap-5">
+                    {p.url && (
+                      <a
+                        href={p.url}
+                        {...(p.url.startsWith('http')
+                          ? { target: '_blank', rel: 'noopener noreferrer' }
+                          : {})}
+                        className="inline-flex items-center gap-1.5 font-body text-sm font-semibold text-ink/80 hover:text-accent transition-colors cursor-pointer group/link"
+                      >
+                        View live
+                        <ArrowSquareOut
+                          size={14}
+                          weight="bold"
+                          aria-hidden="true"
+                          className="group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform"
+                        />
+                      </a>
+                    )}
                     <button
                       type="button"
                       onClick={() => openForProject(p)}
