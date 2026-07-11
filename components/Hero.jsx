@@ -1,3 +1,5 @@
+import FloatingOfferButtons from './FloatingOfferButtons'
+
 const CHIPS = [
   'Lead Generation', 'Web Scraping', 'AI Chatbots',
   'RAG Pipelines',   'n8n Workflows', 'Voice AI',
@@ -77,6 +79,9 @@ export default function Hero() {
           background: '#ff7a18',
         }}
       />
+
+      {/* ── Floating offer buttons — expand smoothly on hover ─────────────────── */}
+      <FloatingOfferButtons />
 
       {/* ── Main centered content ───────────────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-5 w-full py-24 relative z-10">
