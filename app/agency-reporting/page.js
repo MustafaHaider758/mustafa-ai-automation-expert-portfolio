@@ -15,7 +15,6 @@ import {
   CheckCircle,
   XCircle,
   ArrowRight,
-  ArrowSquareOut,
   EnvelopeSimple,
 } from '@phosphor-icons/react'
 
@@ -219,16 +218,6 @@ export default function AgencyReportingPage() {
               >
                 Open the ROI calculator
                 <ArrowRight size={16} />
-              </a>
-              <a
-                href="https://www.automationslimited.com/agency-reporting"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 font-body font-semibold text-sm rounded-xl transition-all hover:-translate-y-0.5"
-                style={{ border: '1.5px solid rgba(0,0,0,0.12)', color: 'rgba(20,20,18,0.85)' }}
-              >
-                View the official offer at Automations Limited
-                <ArrowSquareOut size={15} className="opacity-60" />
               </a>
             </div>
           </div>
